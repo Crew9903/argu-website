@@ -1,7 +1,8 @@
-﻿import type { Metadata } from "next";
+﻿// src/app/[locale]/legal/privacy/page.tsx
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { getLegalBySlug, type Locale } from "@/lib/content";
 import Mdx from "@/components/mdx/Mdx";
-import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -12,11 +13,11 @@ export async function generateMetadata({
   const doc = await getLegalBySlug("privacy", locale);
   if (!doc) return {};
   return {
-    title: (doc as any).seoTitle ?? (doc as any).title ?? "Privacy Policy — ARGU",
+    title: doc.seoTitle ?? doc.title ?? "Privacy Policy — argü",
     description:
-      (doc as any).seoDescription ??
-      (doc as any).description ??
-      "Read ARGU’s privacy policy.",
+      doc.seoDescription ??
+      doc.description ??
+      "How argü handles personal data, cookies, and communications.",
   };
 }
 

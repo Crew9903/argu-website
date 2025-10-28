@@ -1,7 +1,8 @@
-﻿import type { Metadata } from "next";
+﻿// src/app/[locale]/services/page.tsx
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { getPageBySlug, type Locale } from "@/lib/content";
 import Mdx from "@/components/mdx/Mdx";
-import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -12,11 +13,11 @@ export async function generateMetadata({
   const doc = await getPageBySlug("services", locale);
   if (!doc) return {};
   return {
-    title: (doc as any).seoTitle ?? (doc as any).title ?? "ARGU — Services",
+    title: doc.seoTitle ?? doc.title ?? "argü — Services",
     description:
-      (doc as any).seoDescription ??
-      (doc as any).description ??
-      "Explore ARGU’s digital operations & content systems",
+      doc.seoDescription ??
+      doc.description ??
+      "Custom pieces, collaborations, and creative production by argü.",
   };
 }
 

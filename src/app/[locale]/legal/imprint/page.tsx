@@ -1,7 +1,8 @@
-﻿import type { Metadata } from "next";
+﻿// src/app/[locale]/legal/imprint/page.tsx
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { getLegalBySlug, type Locale } from "@/lib/content";
 import Mdx from "@/components/mdx/Mdx";
-import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -12,11 +13,11 @@ export async function generateMetadata({
   const doc = await getLegalBySlug("imprint", locale);
   if (!doc) return {};
   return {
-    title: (doc as any).seoTitle ?? (doc as any).title ?? "Imprint — ARGU",
+    title: doc.seoTitle ?? doc.title ?? "Imprint — argü",
     description:
-      (doc as any).seoDescription ??
-      (doc as any).description ??
-      "View ARGU’s legal imprint.",
+      doc.seoDescription ??
+      doc.description ??
+      "Legal disclosure and contact details for argü collective.",
   };
 }
 
