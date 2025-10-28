@@ -1,0 +1,9 @@
+{
+  "home": { "title": "ARGU", "tagline": "Art is everywhere" },
+  "nav": { "home": "Home", "about": "About", "archive": "Archive", "services": "Services" },
+  "footer": {
+    "privacy": "Privacy Policy",
+    "imprint": "Imprint",
+    "copyright": "© {year} ARGU Collective"
+  }
+}

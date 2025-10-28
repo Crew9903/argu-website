@@ -1,0 +1,9 @@
+{
+  "home": { "title": "ARGU", "tagline": "El arte está en todas partes" },
+  "nav": { "home": "Inicio", "about": "Sobre nosotros", "archive": "Archivo", "services": "Servicios" },
+  "footer": {
+    "privacy": "Política de Privacidad",
+    "imprint": "Aviso Legal",
+    "copyright": "© {year} ARGU Collective"
+  }
+}

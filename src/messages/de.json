@@ -1,0 +1,9 @@
+{
+  "home": { "title": "ARGU", "tagline": "Kunst ist überall" },
+  "nav": { "home": "Startseite", "about": "Über uns", "archive": "Archiv", "services": "Dienstleistungen" },
+  "footer": {
+    "privacy": "Datenschutzerklärung",
+    "imprint": "Impressum",
+    "copyright": "© {year} ARGU Collective"
+  }
+}
