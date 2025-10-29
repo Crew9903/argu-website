@@ -1,6 +1,6 @@
 {
   "home": { "title": "ARGU", "tagline": "Art is everywhere" },
-  "nav": { "home": "Home", "about": "About", "archive": "Archive", "services": "Services" },
+  "nav": { "home": "Home", "about": "About", "archive": "Archive", "services": "Services", "language": "Language" },
   "footer": {
     "privacy": "Privacy Policy",
     "imprint": "Imprint",

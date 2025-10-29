@@ -1,6 +1,6 @@
 {
   "home": { "title": "ARGU", "tagline": "El arte está en todas partes" },
-  "nav": { "home": "Inicio", "about": "Sobre nosotros", "archive": "Archivo", "services": "Servicios" },
+  "nav": { "home": "Inicio", "about": "Sobre nosotros", "archive": "Archivo", "services": "Servicios", "language": "Idioma" },
   "footer": {
     "privacy": "Política de Privacidad",
     "imprint": "Aviso Legal",

@@ -10,15 +10,25 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="fixed bottom-0 left-0 w-full bg-black/70 backdrop-blur-md border-t border-neutral-800 text-white text-sm">
-      <div className="mx-auto max-w-5xl p-4 flex items-center justify-between">
-        <span>{t("copyright", { year })}</span>
+    <footer className="w-full border-t border-black/10 bg-white text-black text-sm mt-24">
+      <div className="mx-auto max-w-6xl px-4 md:px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <span className="opacity-70">
+          {t("copyright", { year })}
+        </span>
 
-        <nav className="flex gap-6">
-          <Link href={`/${locale}/legal/privacy`} className="hover:underline" aria-label={t("privacy")}>
+        <nav className="flex gap-6 opacity-80 hover:[&>*]:opacity-100 transition">
+          <Link
+            href={`/${locale}/legal/privacy`}
+            className="hover:underline"
+            aria-label={t("privacy")}
+          >
             {t("privacy")}
           </Link>
-          <Link href={`/${locale}/legal/imprint`} className="hover:underline" aria-label={t("imprint")}>
+          <Link
+            href={`/${locale}/legal/imprint`}
+            className="hover:underline"
+            aria-label={t("imprint")}
+          >
             {t("imprint")}
           </Link>
         </nav>

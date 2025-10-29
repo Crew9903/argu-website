@@ -1,6 +1,6 @@
 {
   "home": { "title": "ARGU", "tagline": "Kunst ist überall" },
-  "nav": { "home": "Startseite", "about": "Über uns", "archive": "Archiv", "services": "Dienstleistungen" },
+  "nav": { "home": "Startseite", "about": "Über uns", "archive": "Archiv", "services": "Leistungen", "language": "Sprache" },
   "footer": {
     "privacy": "Datenschutzerklärung",
     "imprint": "Impressum",

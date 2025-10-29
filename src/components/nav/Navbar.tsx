@@ -21,31 +21,29 @@ export default function Navbar() {
 
   const locales = ["es", "en", "de"] as const;
 
-  // close on route / locale change
   useEffect(() => setOpen(false), [pathname, locale]);
 
-  // helper: active link styling
   const isActive = (href: string) => {
-    // exact match for home; startsWith for sections
     if (href === `/${locale}`) return pathname === `/${locale}`;
     return pathname.startsWith(href);
   };
 
-  // compute same-path link for locale switcher
   const pathWithoutLocale = pathname.replace(/^\/(es|en|de)/, "") || "";
   const pathFor = (lc: string) => `/${lc}${pathWithoutLocale}`;
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/60 backdrop-blur">
-      <div className="mx-auto max-w-6xl px-4 md:px-6 h-14 flex items-center gap-4">
-        {/* Desktop nav (left-aligned) */}
+    <header className="fixed inset-x-0 top-0 z-50 bg-white/85 backdrop-blur border-b border-black/10">
+      <div className="relative mx-auto max-w-6xl px-4 md:px-6 h-14 flex items-center gap-4">
+        {/* Desktop nav (left) */}
         <nav className="hidden md:flex items-center gap-6">
           {links.map((l) => (
             <Link
               key={l.key}
               href={l.href}
-              className={`text-sm hover:text-white ${
-                isActive(l.href) ? "text-white" : "text-white/80"
+              className={`text-sm transition-colors ${
+                isActive(l.href)
+                  ? "text-black font-medium"
+                  : "text-black/70 hover:text-black"
               }`}
             >
               {l.label}
@@ -53,14 +51,16 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Push locale switcher to the far right on desktop */}
+        {/* Desktop locale (right) */}
         <div className="hidden md:flex items-center gap-2 ml-auto text-xs">
           {locales.map((lc) => (
             <Link
               key={lc}
               href={pathFor(lc)}
-              className={`hover:text-white ${
-                lc === locale ? "text-white" : "text-white/60"
+              className={`transition-colors ${
+                lc === locale
+                  ? "text-black"
+                  : "text-black/60 hover:text-black"
               }`}
             >
               {lc.toUpperCase()}
@@ -74,63 +74,68 @@ export default function Navbar() {
           aria-label="Open menu"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="md:hidden ml-auto inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-white/80 hover:text-white hover:border-white/20"
+          className="md:hidden ml-auto inline-flex h-9 w-9 items-center justify-center rounded-lg border border-black/10 text-black/80 hover:text-black hover:border-black/20"
         >
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
             <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </button>
-      </div>
 
-      {/* Mobile panel */}
-      <div
-        className={`md:hidden transition-[transform,opacity] duration-200 origin-top ${
-          open ? "opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-2"
-        }`}
-      >
-        <div className="mx-2 rounded-2xl border border-white/10 bg-black/80 backdrop-blur p-3">
-          <nav className="flex flex-col">
-            {links.map((l) => (
-              <Link
-                key={l.key}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className={`px-3 py-3 rounded-lg text-base hover:bg-white/10 ${
-                  isActive(l.href) ? "text-white" : "text-white/90"
-                }`}
-              >
-                {l.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="mt-2 border-t border-white/10 pt-2 px-1">
-            <div className="text-xs text-white/60 mb-1">Language</div>
-            <div className="flex gap-2">
-              {locales.map((lc) => (
+        {/* Mobile panel (absolute; doesn’t push content) */}
+        <div
+          className={`md:hidden absolute inset-x-0 top-14 z-50 transition-[transform,opacity] duration-200 origin-top ${
+            open ? "opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-2"
+          }`}
+        >
+          {/* Panel card — ABOVE the overlay */}
+          <div className="relative z-50 mx-2 rounded-2xl border border-black/10 bg-white/95 backdrop-blur p-3 shadow-lg pointer-events-auto">
+            <nav className="flex flex-col">
+              {links.map((l) => (
                 <Link
-                  key={lc}
-                  href={pathFor(lc)}
+                  key={l.key}
+                  href={l.href}
                   onClick={() => setOpen(false)}
-                  className={`px-2 py-1 rounded-md border text-xs ${
-                    lc === locale
-                      ? "border-white/30 text-white"
-                      : "border-white/10 text-white/70 hover:border-white/20 hover:text-white"
+                  className={`px-3 py-3 rounded-lg text-base transition-colors ${
+                    isActive(l.href)
+                      ? "text-black bg-black/5"
+                      : "text-black/90 hover:bg-black/5 hover:text-black"
                   }`}
                 >
-                  {lc.toUpperCase()}
+                  {l.label}
                 </Link>
               ))}
+            </nav>
+
+            <div className="mt-2 border-t border-black/10 pt-2 px-1">
+              <div className="text-xs text-black/60 mb-1">{t("language")}</div>
+              <div className="flex gap-2">
+                {locales.map((lc) => (
+                  <Link
+                    key={lc}
+                    href={pathFor(lc)}
+                    onClick={() => setOpen(false)}
+                    className={`px-2 py-1 rounded-md border text-xs transition-colors ${
+                      lc === locale
+                        ? "border-black/30 text-black"
+                        : "border-black/10 text-black/70 hover:border-black/20 hover:text-black"
+                    }`}
+                  >
+                    {lc.toUpperCase()}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Tap-to-close overlay */}
-        <button
-          aria-label="Close menu"
-          onClick={() => setOpen(false)}
-          className={`fixed inset-0 -z-10 ${open ? "block" : "hidden"}`}
-        />
+          {/* Tap-to-close overlay — BELOW the panel */}
+          {open && (
+            <button
+              aria-label="Close menu"
+              onClick={() => setOpen(false)}
+              className="fixed inset-0 z-40 bg-transparent"
+            />
+          )}
+        </div>
       </div>
     </header>
   );
